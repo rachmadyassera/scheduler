@@ -19,14 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-});
-Route::get('/about', function () {
-    return view('front-end.about');
+    return view('auth/login');
 });
 
+
 Auth::routes();
-Route::resource('dashboard', DashboardController::class)->middleware('can:isAdmin');
+Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
 Route::resource('user', UserController::class)->middleware('can:isAdmin');
