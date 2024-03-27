@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,8 +22,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $datauser = User::get();
-        return view('User.index', compact('datauser'));
+        $datauser = User::with('opd')->whereNot('name','developer')->latest()->get()->whereNotIn('email','alpatester@siap.app');
+        return view('SAdmin.User.index', compact('datauser'));
     }
     // public function index(Request $request) //membuat json untuk datatable serverside
     // {
@@ -39,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('User.add');
+        return view('SAdmin.User.add');
     }
 
     /**
@@ -115,5 +116,18 @@ class UserController extends Controller
 
         Alert::success('Success', 'You\'ve Successfully Deleted');
         return redirect()->route('user.index');
+    }
+
+    // =================== other function =================================
+
+    public function reset_pass($id)
+    {
+        $user = User::find($id);
+        $user->password = bcrypt('1234');
+        $user->save();
+
+        Alert::success('Berhasil', 'Password pengguna telah direset !');
+        return back();
+
     }
 }

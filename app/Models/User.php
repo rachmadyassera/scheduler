@@ -55,4 +55,15 @@ class User extends Authenticatable
         return 'string';
     }
 
+    public function profil()
+    {
+        return $this->hasOne(Profil::class);
+    }
+
+    public function opd()
+    {
+        return $this->belongsTo(Opd::class);
+    }
+
+
 }

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm bg-success">
-    <a class="navbar-brand" href="{{ url('/') }}">SIAP - Sistem Informasi Agenda Pejabat</a>
+    <a class="navbar-brand" href="{{ url('/') }}">SIAP - Sistem Informasi Agenda Pimpinan</a>
     {{-- <div class="nav-collapse">
             <ul class="navbar-nav">
             <li class="nav-item active">
