@@ -28,8 +28,8 @@
 
                             @foreach ($org as $og )
                             <tr>
-                                <td>{{$og->nama}}</td>
-                                <td>{{$og->alamat}}</td>
+                                <td>{{$og->name}}</td>
+                                <td>{{$og->address}}</td>
                                 <td>{{$og->longitude}}</td>
                                 <td>{{$og->latitude}}</td>
                                 <td>
@@ -42,7 +42,7 @@
                                 <td>
                                     <ul class="nav">
                                         <a href="{{route ('organization.edit', $og->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a> &nbsp;
-                                        <a href="/oraganization/disable/{{$og->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>
+                                        <a href="/organization/disable/{{$og->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-recycle"></i> </a>
                                     </ul>
                                 </td>
                             </tr>

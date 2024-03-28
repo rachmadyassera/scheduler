@@ -60,7 +60,7 @@ class OrganizationController extends Controller
     {
         //
         $Organization = Organization::find($id);
-        return view('SAdmin.Organization.edit', ['Organization' => $org]);
+        return view('SAdmin.Organization.edit', ['org' => $Organization]);
     }
 
     /**
@@ -70,14 +70,14 @@ class OrganizationController extends Controller
     {
         //
         $Organization = Organization::find($id);
-        $Organization->nama = $request->nama;
-        $Organization->alamat = $request->alamat;
+        $Organization->name = $request->name;
+        $Organization->address = $request->address;
         $Organization->longitude = $request->longitude;
         $Organization->latitude = $request->latitude;
         $Organization->save();
 
         Alert::success('Berhasil', 'Organisasi berhasil diperbaharui');
-        return redirect()->route('Organization.index');
+        return redirect()->route('organization.index');
     }
 
     /**
@@ -95,11 +95,20 @@ class OrganizationController extends Controller
     public function disable($id)
     {
         $Organization = Organization::find($id);
-        $Organization->status = 'disable';
+
+        if ($Organization->status == 'enable') {
+            # code...
+            $Organization->status = 'disable';
+        } else {
+            # code...
+            $Organization->status = 'enable';
+        }
         $Organization->save();
 
-        Alert::success('Berhasil', 'Organisasi berhasil didaftarkan');
+        Alert::success('Berhasil', 'Status Organisasi berhasil diperbaharui');
         return redirect()->route('organization.index');
 
     }
+
+
 }

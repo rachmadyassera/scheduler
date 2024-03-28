@@ -15,11 +15,11 @@
                     @method('PUT')
                     <div class="form-group">
                         <label>Nama </label>
-                        <input type="text" name="nama" class="form-control" required value="{{$org->nama}}">
+                        <input type="text" name="name" class="form-control" required value="{{$org->name}}">
                     </div>
                     <div class="form-group">
                         <label>Alamat </label>
-                        <input type="text" name="alamat" class="form-control" required value="{{$org->alamat}}">
+                        <input type="text" name="address" class="form-control" required value="{{$org->address}}">
                     </div>
                     <div class="form-group">
                         <label>Longitude </label>

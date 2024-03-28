@@ -11,11 +11,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 
 <!-- Start GA -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -70,14 +72,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
+
   <!-- JS Libraies -->
+  <script src="{{ asset('assets/js/select2.full.min.js') }}"></script>
+  <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
 
   <!-- Page Specific JS File -->
 
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
-  <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  {{-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
       $(document).ready(function () { // datatable clintside
