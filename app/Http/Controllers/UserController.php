@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Organization;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -40,7 +41,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('SAdmin.User.add');
+        $org = Organization::latest()->get()->where('status','enable');
+        return view('SAdmin.User.add', compact('org'));
     }
 
     /**

@@ -42,7 +42,7 @@
                                 <td>
                                     <ul class="nav">
                                         <a href="{{route ('organization.edit', $og->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a> &nbsp;
-                                        <a href="/organization/disable/{{$og->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-recycle"></i> </a>
+                                        <a href="/organization/disable/{{$og->id}}" class="btn-sm btn-primary" onclick="confirmation_destroy(event)"> <i class="fas fa-toggle-on"></i> </a>
                                     </ul>
                                 </td>
                             </tr>

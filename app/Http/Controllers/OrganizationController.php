@@ -36,13 +36,13 @@ class OrganizationController extends Controller
         //
         Organization::create([
             'id' => Str::uuid(),
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
+            'name' => $request->name,
+            'address' => $request->address,
             'longitude' => $request->longitude,
             'latitude' => $request->latitude,
         ]);
         Alert::success('Berhasil', 'Organisasi berhasil didaftarkan');
-        return redirect()->route('Organization.index');
+        return redirect()->route('organization.index');
     }
 
     /**

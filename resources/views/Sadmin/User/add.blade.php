@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Add User</h4>
+                <h4 class="card-title">Formulir Pendaftaran Pengguna</h4>
                 <div class="card-header-action">
                     <div class="buttons">
                     </div>
@@ -21,11 +21,25 @@
                         <input type="email" name="email" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Role</label>
-                        <select class="form-control" name="role" required>
+                        <label>NIP </label>
+                        <input type="text" name="nip" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jabatan </label>
+                        <input type="text" name="jabatan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>No Hp </label>
+                        <input type="text" name="nohp" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Organisasi</label>
+                        <select class="form-control select2" name="opd" required>
                             <option value = ""> Pilih </option>
-                            <option value = "1"> Admin </option>
-                            <option value = "2"> Member </option>
+                            @foreach ($org as $o)
+                            <option value = "{{ $o->id }}"> {{ $o->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <input type="submit" value="Simpan Data" class="btn btn-success">
