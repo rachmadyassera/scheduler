@@ -41,13 +41,13 @@
                                 <td style="vertical-align: middle; ">
                                     NIP : {{$user->profil->nip}}<br>
                                     Jabatan : {{$user->profil->jabatan}}<br>
-                                    Instansi : {{$user->profil->opd->nama}}<br>
+                                    Instansi : {{$user->profil->organization->name}}<br>
                                     No HP : {{$user->profil->nohp}}
                                 </td>
                                 <td style="vertical-align: middle; ">
                                     <ul class="nav">
                                         <a href="{{route ('user.edit', $user->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>&nbsp;
-                                        <a href="{{route ('user.destroy', $user->id)}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>&nbsp;
+                                        <a href="{{route ('user.destroy', $user->id)}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-toggle-on"></i> </a>&nbsp;
                                         <a href="{{route ('user.reset-pass', $user->id)}}" class="btn-sm btn-success" onclick="confirmation(event)"><i class="fa fa-recycle"></i></a>&nbsp;
                                     </ul>
                                 </td>

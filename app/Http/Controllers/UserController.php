@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Profil;
 use App\Models\Organization;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
@@ -23,16 +24,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $datauser = User::with('opd')->whereNot('name','developer')->latest()->get()->whereNotIn('email','alpatester@siap.app');
+        $datauser = User::with('organization')->whereNot('name','developer')->latest()->get()->whereNotIn('email','alpatester@siap.app');
         return view('SAdmin.User.index', compact('datauser'));
     }
-    // public function index(Request $request) //membuat json untuk datatable serverside
-    // {
-    //     if ($request->ajax()) {
-    //         return DataTables::of(User::query())->toJson();
-    //     }
-    //     return view('User.index');
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -53,14 +47,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => bcrypt('1234')
-        ]);
-        Alert::success('Success', 'You\'ve Successfully Registered');
-        return redirect()->route('user.index');
+        $check_email = User::where('email',$request->email)->first();
+
+        if (empty($check_email)){
+
+            $newData = new User();
+            $newData ->id = Str::uuid();
+            $newData ->name =  $request->name;
+            $newData ->email = $request->email;
+            $newData ->role = 'admin';
+            $newData ->password = bcrypt('1234');
+            $newData ->save();
+
+            Profil::create([
+                'id' => Str::uuid(),
+                'user_id' => $newData->id,
+                'organization_id' => $request->org,
+                'nip' => $request->nip,
+                'jabatan' => $request->jabatan,
+                'nohp' => $request->nohp
+            ]);
+
+            Alert::success('Berhasil', 'Akun pengguna berhasil didaftarkan');
+            return back();
+
+        }else{
+            Alert::warning('Oops', 'Emailnya sudah terdaftar, silahkan gunakan email yang lain.');
+            return back();
+        }
 
     }
 
@@ -83,8 +97,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $datauser = User::find($id);
-        return view('User.edit', ['user' => $datauser]);
+        $user = User::find($id);
+        $org = Organization::latest()->get()->where('status','enable');
+
+        return view('SAdmin.User.edit', compact('org','user'));
     }
 
     /**
@@ -100,9 +116,18 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role = $request->role;
+        $user->status = $request->status;
         $user->save();
 
-        return redirect()->route('user.index');
+        $profil = Profil::find($request->idprofil);
+        $profil->organization_id = $request->organization;
+        $profil->nip = $request->nip;
+        $profil->jabatan = $request->jabatan;
+        $profil->nohp = $request->nohp;
+        $profil->save();
+
+        Alert::success('Berhasil', 'Akun pengguna berhasil diperbaharui');
+        return back();
     }
 
     /**
@@ -113,11 +138,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
+        $User = User::find($id);
 
-        Alert::success('Success', 'You\'ve Successfully Deleted');
-        return redirect()->route('user.index');
+        if ($User->status == 'enable') {
+            # code...
+            $User->status = 'disable';
+        } else {
+            # code...
+            $User->status = 'enable';
+        }
+        $User->save();
+
+        Alert::success('Berhasil', 'Status Pengguna berhasil diperbaharui ('.$User->status.')');
+        return  back();
     }
 
     // =================== other function =================================

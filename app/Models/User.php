@@ -60,9 +60,9 @@ class User extends Authenticatable
         return $this->hasOne(Profil::class);
     }
 
-    public function opd()
+    public function organization()
     {
-        return $this->belongsTo(Opd::class);
+        return $this->belongsTo(Organization::class);
     }
 
 

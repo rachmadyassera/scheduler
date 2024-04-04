@@ -32,7 +32,7 @@ class Profil extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function opd()
+    public function organization()
     {
         return $this->belongsTo(Organization::class);
     }
