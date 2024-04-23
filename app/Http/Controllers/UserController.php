@@ -8,6 +8,7 @@ use App\Models\Profil;
 use App\Models\Organization;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -165,4 +166,49 @@ class UserController extends Controller
         return back();
 
     }
+
+    public function operator()
+    {
+        $datauser = User::with('organization','profil')->where('role','operator')->latest()->get()->where('profil.organization_id',Auth::user()->profil->organization_id);
+        return view('Admin.User.index', compact('datauser'));
+    }
+
+    public function create_operator()
+    {
+        return view('Admin.User.add');
+    }
+
+    public function store_operator(Request $request)
+    {
+        $check_email = User::where('email',$request->email)->first();
+
+        if (empty($check_email)){
+
+            $newData = new User();
+            $newData ->id = Str::uuid();
+            $newData ->name =  $request->name;
+            $newData ->email = $request->email;
+            $newData ->role = 'operator';
+            $newData ->password = bcrypt('1234');
+            $newData ->save();
+
+            Profil::create([
+                'id' => Str::uuid(),
+                'user_id' => $newData->id,
+                'organization_id' => Auth::user()->profil->organization_id,
+                'nip' => $request->nip,
+                'jabatan' => $request->jabatan,
+                'nohp' => $request->nohp
+            ]);
+
+            Alert::success('Berhasil', 'Akun operator berhasil didaftarkan');
+            return back();
+
+        }else{
+            Alert::warning('Oops', 'Emailnya sudah terdaftar, silahkan gunakan email yang lain.');
+            return back();
+        }
+
+    }
+
 }

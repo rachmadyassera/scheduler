@@ -19,26 +19,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//====================== GUEST ====================================
 Route::get('/', function () {
     return view('auth/login');
 });
-
-
 Auth::routes();
-Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
+// Route::get('/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
+// Route::resource('catalog', CatalogController::class)->only('index');
+
+// ======================= ALL ROLE ==================================
+Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
+
+
+//========================= SUPER ADMIN ===============================
+
 Route::resource('user', UserController::class)->middleware('can:isSAdmin');
 Route::get('/user/destroy/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.destroy')->middleware('can:isSAdmin');
 Route::get('/user/reset-pass/{id}', 'App\Http\Controllers\UserController@reset_pass')->name('user.reset-pass')->middleware('can:isSAdmin');
 
 Route::resource('organization', OrganizationController::class)->middleware('can:isSAdmin');
+
 Route::get('/organization/disable/{id}', 'App\Http\Controllers\OrganizationController@disable')->middleware('can:isSAdmin');
 
-Route::resource('category', CategoryController::class)->middleware('can:isAdmin');
-Route::resource('product', ProductController::class)->middleware('can:isAdmin');
-Route::resource('catalog', CatalogController::class)->only('index');
+
+//========================== ADMIN ====================================
+Route::get('/operator', 'App\Http\Controllers\UserController@operator')->name('operator')->middleware('can:isAdmin');
+Route::get('/create-operator', 'App\Http\Controllers\UserController@create_operator')->name('create-operator')->middleware('can:isAdmin');
+Route::post('/store-operator', 'App\Http\Controllers\UserController@store_operator')->name('store-operator')->middleware('can:isAdmin');
 
 
+
+//========================== OPERATOR =================================
 
