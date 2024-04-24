@@ -3,7 +3,7 @@
 <div class="container">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Data Operator </h4>
+                <h4 class="card-title">Data Operator {{ Auth::user()->profil->organization->name }}</h4>
                 <div class="card-header-action">
                     <div class="buttons">
                         <a href="{{route ('create-operator')}}"  class="btn btn-icon btn-success"><i class="fas fa-plus-circle"></i> Operator</a>
@@ -39,14 +39,18 @@
                                 <td style="vertical-align: middle; ">
                                     NIP : {{$user->profil->nip}}<br>
                                     Jabatan : {{$user->profil->jabatan}}<br>
-                                    Instansi : {{$user->profil->organization->name}}<br>
                                     No HP : {{$user->profil->nohp}}
                                 </td>
                                 <td style="vertical-align: middle; ">
                                     <ul class="nav">
-                                        <a href="{{route ('user.edit', $user->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>&nbsp;
-                                        <a href="{{route ('user.destroy', $user->id)}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-toggle-on"></i> </a>&nbsp;
-                                        <a href="{{route ('user.reset-pass', $user->id)}}" class="btn-sm btn-success" onclick="confirmation(event)"><i class="fa fa-recycle"></i></a>&nbsp;
+                                        <a href="{{route ('edit-operator', $user->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>&nbsp;
+                                        @if ($user->status =='enable')
+                                        <a href="{{route ('disable-operator', $user->id)}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-toggle-on"></i> </a>
+                                        @else
+                                        <a href="{{route ('disable-operator', $user->id)}}" class="btn-sm btn-success" onclick="confirmation_destroy(event)"> <i class="fa fa-toggle-on"></i> </a>
+                                        @endif
+                                        &nbsp;
+                                        <a href="{{route ('reset-pass-operator', $user->id)}}" class="btn-sm btn-primary" onclick="confirmation(event)"><i class="fa fa-recycle"></i></a>&nbsp;
                                     </ul>
                                 </td>
                             </tr>

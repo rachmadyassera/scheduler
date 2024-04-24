@@ -15,14 +15,9 @@
             <a href="{{ url('/operator') }}" class="nav-link "><i class="fas fa-users"></i><span>Operator</span></a>
         </li>
         <li class="dropdown">
-            <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-box"></i> <span>Product</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{ url('/category')}}">Category Product</a></li>
-                <li><a class="nav-link" href="{{ url('/product')}}">Data Product</a></li>
-              </ul>
-            </li>
-          </li>
+            <a href="{{ url('/agenda') }}" class="nav-link "><i class="fas fa-calendar-alt"></i><span>Agenda</span></a>
+        </li>
+
       </ul>
 
     </aside>

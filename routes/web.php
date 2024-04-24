@@ -48,6 +48,11 @@ Route::get('/organization/disable/{id}', 'App\Http\Controllers\OrganizationContr
 Route::get('/operator', 'App\Http\Controllers\UserController@operator')->name('operator')->middleware('can:isAdmin');
 Route::get('/create-operator', 'App\Http\Controllers\UserController@create_operator')->name('create-operator')->middleware('can:isAdmin');
 Route::post('/store-operator', 'App\Http\Controllers\UserController@store_operator')->name('store-operator')->middleware('can:isAdmin');
+Route::get('/edit-operator/{id}', 'App\Http\Controllers\UserController@edit_operator')->name('edit-operator')->middleware('can:isAdmin');
+Route::put('/update-operator', 'App\Http\Controllers\UserController@update_operator')->name('update-operator')->middleware('can:isAdmin');
+Route::get('/disable-operator/{id}', 'App\Http\Controllers\UserController@disable_operator')->name('disable-operator')->middleware('can:isAdmin');
+Route::get('/user/reset-pass-operator/{id}', 'App\Http\Controllers\UserController@reset_pass_operator')->name('reset-pass-operator')->middleware('can:isAdmin');
+
 
 
 

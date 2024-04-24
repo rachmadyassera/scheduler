@@ -211,4 +211,55 @@ class UserController extends Controller
 
     }
 
+    public function edit_operator($id)
+    {
+        $user = User::find($id);
+        return view('Admin.User.edit', compact('user'));
+    }
+
+    public function update_operator(Request $request)
+    {
+        $user = User::find($request->iduser);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->status = $request->status;
+        $user->save();
+
+        $profil = Profil::find($request->idprofil);
+        $profil->nip = $request->nip;
+        $profil->jabatan = $request->jabatan;
+        $profil->nohp = $request->nohp;
+        $profil->save();
+
+        Alert::success('Berhasil', 'Data operator berhasil diperbaharui');
+        return back();
+    }
+
+    public function disable_operator($id)
+    {
+        $User = User::find($id);
+
+        if ($User->status == 'enable') {
+            # code...
+            $User->status = 'disable';
+        } else {
+            # code...
+            $User->status = 'enable';
+        }
+        $User->save();
+
+        Alert::success('Berhasil', 'Status operator berhasil diperbaharui ('.$User->status.')');
+        return  back();
+    }
+
+    public function reset_pass_operator($id)
+    {
+        $user = User::find($id);
+        $user->password = bcrypt('1234');
+        $user->save();
+
+        Alert::success('Berhasil', 'Password operator telah direset !');
+        return back();
+
+    }
 }
