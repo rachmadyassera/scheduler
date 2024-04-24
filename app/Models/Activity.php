@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     use HasFactory;
+    public $table = 'activitys';
+
 
     protected $fillable = [
         'id',
@@ -29,4 +31,15 @@ class Activity extends Model
     public function getKeyType(){
         return 'string';
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
 }

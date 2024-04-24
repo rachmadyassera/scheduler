@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\CategoryController;
@@ -53,6 +54,7 @@ Route::put('/update-operator', 'App\Http\Controllers\UserController@update_opera
 Route::get('/disable-operator/{id}', 'App\Http\Controllers\UserController@disable_operator')->name('disable-operator')->middleware('can:isAdmin');
 Route::get('/user/reset-pass-operator/{id}', 'App\Http\Controllers\UserController@reset_pass_operator')->name('reset-pass-operator')->middleware('can:isAdmin');
 
+Route::resource('activity', ActivityController::class)->middleware('can:isAdmin');
 
 
 
