@@ -45,7 +45,7 @@
                                 </td>
                                 <td style="vertical-align: middle; ">
                                     <ul class="nav">
-                                        <a href="{{route ('edit-operator', $act->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route ('activity.edit', $act->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                         &nbsp;
                                         <a href="{{route ('reset-pass-operator', $act->id)}}" class="btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-window-close"></i></a>&nbsp;
                                     </ul>

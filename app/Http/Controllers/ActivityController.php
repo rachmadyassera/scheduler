@@ -64,7 +64,8 @@ class ActivityController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $act = Activity::find($id);
+        return view('Admin.Agenda.edit', compact('act'));
     }
 
     /**
@@ -72,7 +73,16 @@ class ActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $act = Activity::find($id);
+        $act->date_activity = $request->date_activity;
+        $act->name_activity = $request->name_activity;
+        $act->location = $request->location;
+        $act->location = $request->location;
+        $act->accompanying_officer = $request->accompanying_officer;
+        $act->save();
+
+        Alert::success('Berhasil', 'Data kegiatan berhasil diperbaharui');
+        return back();
     }
 
     /**
