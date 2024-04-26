@@ -27,7 +27,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.Agenda.add');
     }
 
     /**
@@ -35,7 +35,20 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $newData = new Activity();
+        $newData ->id = Str::uuid();
+        $newData ->user_id = Auth::user()->id;
+        $newData ->organization_id = Auth::user()->profil->organization_id;
+        $newData ->date_activity =  $request->date_activity;
+        $newData ->name_activity = $request->name_activity;
+        $newData ->location = $request->location;
+        $newData ->description = $request->description;
+        $newData ->accompanying_officer = $request->accompanying_officer;
+        $newData ->save();
+
+        Alert::success('Berhasil', 'Kegiatan berhasil didaftarkan');
+        return back();
     }
 
     /**

@@ -6,7 +6,7 @@
                 <h4 class="card-title">Data Agenda {{ Auth::user()->profil->organization->name }}</h4>
                 <div class="card-header-action">
                     <div class="buttons">
-                        <a href="{{route ('create-operator')}}"  class="btn btn-icon btn-success"><i class="fas fa-plus-circle"></i> Kegiatan</a>
+                        <a href="{{route ('activity.create')}}"  class="btn btn-icon btn-success"><i class="fas fa-plus-circle"></i> Kegiatan</a>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                                 <td>Keterangan</td>
                                 <td>Petugas Pendamping</td>
                                 <td>Status</td>
-                                <td>Aksi</td>
+                                <td style="width: 100px">Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                                     <ul class="nav">
                                         <a href="{{route ('edit-operator', $act->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                         &nbsp;
-                                        <a href="{{route ('reset-pass-operator', $user->id)}}" class="btn-sm btn-primary" onclick="confirmation(event)"><i class="fa fa-recycle"></i></a>&nbsp;
+                                        <a href="{{route ('reset-pass-operator', $act->id)}}" class="btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-window-close"></i></a>&nbsp;
                                     </ul>
                                 </td>
                             </tr>

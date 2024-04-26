@@ -3,34 +3,34 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Formulir Pendaftaran Operator SIAP - {{ Auth::user()->profil->organization->name }}</h4>
+                <h4 class="card-title">Formulir Pendaftaran Kegiatan Pimpinan - {{ Auth::user()->profil->organization->name }}</h4>
                 <div class="card-header-action">
                     <div class="buttons">
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('store-operator')}}" method="POST">
+                <form action="{{route('activity.store')}}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Nama </label>
-                        <input type="text" name="name" class="form-control" required>
+                        <label>Tanggal </label>
+                        <input type="datetime-local" name="date_activity" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Email </label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label>Nama Kegiatan</label>
+                        <input type="text" name="name_activity" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>NIP </label>
-                        <input type="text" name="nip" class="form-control" required>
+                        <label>Lokasi </label>
+                        <textarea name="location"  class="form-control" style="height: 100px;" ></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Jabatan </label>
-                        <input type="text" name="jabatan" class="form-control" required>
+                        <label>Deskripsi </label>
+                        <textarea name="description"  class="form-control" style="height: 100px;" ></textarea>
                     </div>
                     <div class="form-group">
-                        <label>No Hp </label>
-                        <input type="text" name="nohp" class="form-control" required>
+                        <label>Pejabat Pendamping </label>
+                        <textarea name="accompanying_officer"  class="form-control" style="height: 100px;" ></textarea>
                     </div>
                     <div class="text-right">
                         <input type="submit" value="Simpan Data" class="btn btn-success">
