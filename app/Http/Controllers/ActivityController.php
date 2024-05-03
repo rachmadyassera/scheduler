@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\User;
@@ -35,6 +36,14 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        $request_date = Carbon::parse($request->date_activity)->toDateTimeString();
+        // dd($request_date, $request->date_activity);
+        $check_date_act = Activity::where('date_activity',$request_date )->where('status','enable')->first();
+        // dd($check_date_act);
+        if(!empty($check_date_act)){
+            Alert::warning('Gagal', 'Tanggal Kegiatan memiliki waktu yang sama dengan kegiatan '.$check_date_act->name_activity.' yang telah terdaftar pada sistem');
+            return  back();
+        }
 
         $newData = new Activity();
         $newData ->id = Str::uuid();
@@ -45,10 +54,11 @@ class ActivityController extends Controller
         $newData ->location = $request->location;
         $newData ->description = $request->description;
         $newData ->accompanying_officer = $request->accompanying_officer;
+        $newData ->status = 'disable';
         $newData ->save();
 
-        Alert::success('Berhasil', 'Kegiatan berhasil didaftarkan');
-        return back();
+        Alert::warning('Konfirmasi', 'Pastikan kegiatan tidak terbentur !');
+        return redirect()->route('activity.show', $newData->id);
     }
 
     /**
@@ -56,7 +66,15 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $act = Activity::find($id);
+        $date_subhour = Carbon::parse($act->date_activity)->subHour();
+        $date_addhour = Carbon::parse($act->date_activity)->addHour();
+        $start_date = Carbon::parse($date_subhour)->toDateTimeString();
+        $end_date = Carbon::parse($date_addhour)->toDateTimeString();
+        $arround_act = Activity::whereBetween('date_activity',[$date_subhour,$date_addhour] )->where('status','enable')->get();
+        // dd($date_subhour, $date_addhour,$start_date, $end_date);
+        // dd($start_date, $end_date);
+        return view('Admin.Agenda.show', compact('act', 'arround_act'));
     }
 
     /**
@@ -73,11 +91,20 @@ class ActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request_date = Carbon::parse($request->date_activity)->toDateTimeString();
+        // dd($request_date, $request->date_activity);
+        $check_date_act = Activity::where('date_activity',$request_date )->where('status','enable')->first();
+        // dd($check_date_act);
+        if(!empty($check_date_act)){
+            Alert::warning('Gagal', 'Tanggal Kegiatan memiliki waktu yang sama dengan kegiatan '.$check_date_act->name_activity.' yang telah terdaftar pada sistem');
+            return  back();
+        }
+        // dd($request_date);
         $act = Activity::find($id);
         $act->date_activity = $request->date_activity;
         $act->name_activity = $request->name_activity;
         $act->location = $request->location;
-        $act->location = $request->location;
+        $act->description = $request->description;
         $act->accompanying_officer = $request->accompanying_officer;
         $act->save();
 
@@ -90,6 +117,41 @@ class ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $act = Activity::find($id);
+        $act->status = 'disable';
+        $act->save();
+
+        Alert::success('Berhasil', 'Kegiatan ('.$act->name_activity.') berhasil dihapus.');
+        return  back();
+    }
+
+    public function cancel_activity($id)
+    {
+        $act = Activity::find($id);
+        $act->status_activity = 'cancel';
+        $act->save();
+
+        Alert::success('Berhasil', 'Kegiatan ('.$act->name_activity.') berhasil dihapus.');
+        return  back();
+    }
+
+    public function approve_activity(Request $request)
+    {
+
+        $request_date = Carbon::parse($request->date_activity)->toDateTimeString();
+        // dd($request_date, $request->date_activity);
+        $check_date_act = Activity::where('date_activity',$request_date )->where('status','enable')->first();
+        // dd($check_date_act);
+        if(!empty($check_date_act)){
+            Alert::warning('Gagal', 'Tanggal Kegiatan memiliki waktu yang sama dengan kegiatan '.$check_date_act->name_activity.' yang telah terdaftar pada sistem');
+            return  back();
+        }
+
+        $act = Activity::find($id);
+        $act->status = 'enable';
+        $act->save();
+
+        Alert::success('Berhasil', 'Kegiatan ('.$act->name_activity.') berhasil didaftarkan.');
+        return  back();
     }
 }

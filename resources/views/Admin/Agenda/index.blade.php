@@ -22,6 +22,8 @@
                                 <td>Keterangan</td>
                                 <td>Petugas Pendamping</td>
                                 <td>Status</td>
+                                <td>Created</td>
+                                <td>Updated</td>
                                 <td style="width: 100px">Aksi</td>
                             </tr>
                         </thead>
@@ -38,16 +40,18 @@
                                     @if ($act->status_activity =='complete')
                                     <div class="badge badge-success">Complete</div>
                                     @elseif ($act->status_activity =='cancel')
-                                    <div class="badge badge-danger">Enable</div>
+                                    <div class="badge badge-danger">Cancel</div>
                                     @else
                                     <div class="badge badge-warning">Pending</div>
                                     @endif
                                 </td>
+                                <td style="vertical-align: middle; ">{{$act->created_at}}</td>
+                                <td style="vertical-align: middle; ">{{$act->updated_at}}</td>
                                 <td style="vertical-align: middle; ">
                                     <ul class="nav">
                                         <a href="{{route ('activity.edit', $act->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                         &nbsp;
-                                        <a href="{{route ('reset-pass-operator', $act->id)}}" class="btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-window-close"></i></a>&nbsp;
+                                        <a href="/cancel-activity/{{$act->id}}" class="btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-window-close"></i></a>
                                     </ul>
                                 </td>
                             </tr>
