@@ -147,11 +147,12 @@ class ActivityController extends Controller
             return  back();
         }
 
-        $act = Activity::find($id);
+        $act = Activity::find($request->id);
         $act->status = 'enable';
         $act->save();
 
         Alert::success('Berhasil', 'Kegiatan ('.$act->name_activity.') berhasil didaftarkan.');
-        return  back();
+        return redirect()->route('activity.index');
+
     }
 }

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Data Kegiatan 1 jam sebelum dan sesudah pada waktu kegiatan yang akan didaftarkan </h4>
+                <h4 class="card-title">Data kegiatan 1 jam sebelum dan sesudah pada waktu kegiatan yang akan didaftarkan </h4>
                 <div class="card-header-action">
                     <div class="buttons">
                     </div>
@@ -52,9 +52,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{route('activity.approve_activity')}}" method="POST">
+                <form action="{{route('activity.approve-activity')}}" method="POST">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="id" class="form-control" value="{{$act->id}}" readonly>
+
                     <div class="form-group">
                         <label>Tanggal </label>
                         <input type="datetime-local" name="date_activity" class="form-control" required  value="{{$act->date_activity}}" autofocus>

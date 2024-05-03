@@ -54,9 +54,10 @@ Route::put('/update-operator', 'App\Http\Controllers\UserController@update_opera
 Route::get('/disable-operator/{id}', 'App\Http\Controllers\UserController@disable_operator')->name('disable-operator')->middleware('can:isAdmin');
 Route::get('/user/reset-pass-operator/{id}', 'App\Http\Controllers\UserController@reset_pass_operator')->name('reset-pass-operator')->middleware('can:isAdmin');
 
-Route::resource('activity', ActivityController::class)->middleware('can:isAdmin');
+Route::put('/activity/approve-activity', 'App\Http\Controllers\ActivityController@approve_activity')->name('activity.approve-activity')->middleware('can:isAdmin');
 Route::get('/cancel-activity/{id}', 'App\Http\Controllers\ActivityController@cancel_activity')->middleware('can:isAdmin');
-Route::put('/activity/approve_activity', 'App\Http\Controllers\ActivityController@approve_activity')->name('activity.approve_activity')->middleware('can:isAdmin');
+Route::resource('activity', ActivityController::class)->middleware('can:isAdmin');
+
 
 
 
