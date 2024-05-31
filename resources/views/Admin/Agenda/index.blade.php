@@ -13,7 +13,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     {{-- Table clientside --}}
-                    <table id="datatables" class="table table-hover table-bordered table-striped">
+                    <table id="datatables-disordering" class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
                                 <td>Tanggal</td>
@@ -24,19 +24,19 @@
                                 <td>Status</td>
                                 <td>Created</td>
                                 <td>Updated</td>
-                                <td style="width: 100px">Aksi</td>
+                                <td>Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
 
                             @foreach ($activity as $act )
                             <tr>
-                                <td style="vertical-align: middle; ">{{$act->date_activity}}</td>
-                                <td style="vertical-align: middle; ">{{$act->name_activity}}</td>
-                                <td style="vertical-align: middle; ">{{$act->location}}</td>
-                                <td style="vertical-align: middle; ">{{$act->description}}</td>
-                                <td style="vertical-align: middle; ">{{$act->accompanying_officer}}</td>
-                                <td style="vertical-align: middle; ">
+                                <td style="width:100px">{{$act->date_activity}}</td>
+                                <td>{{$act->name_activity}}</td>
+                                <td >{{$act->location}}</td>
+                                <td >{{$act->description}}</td>
+                                <td >{{$act->accompanying_officer}}</td>
+                                <td >
                                     @if ($act->status_activity =='complete')
                                     <div class="badge badge-success">Complete</div>
                                     @elseif ($act->status_activity =='cancel')
@@ -45,17 +45,24 @@
                                     <div class="badge badge-warning">Pending</div>
                                     @endif
                                 </td>
-                                <td style="vertical-align: middle; ">{{$act->created_at}}</td>
-                                <td style="vertical-align: middle; ">{{$act->updated_at}}</td>
-                                <td style="vertical-align: middle; ">
+                                <td >{{$act->created_at}}</td>
+                                <td >{{$act->updated_at}}</td>
+                                <td style="width: 75px">
                                     <ul class="nav">
+                                        @if ($act->status_activity == 'pending')
+
                                         <a href="{{route ('activity.edit', $act->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                         &nbsp;
                                         <a href="/cancel-activity/{{$act->id}}" class="btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-window-close"></i></a>
+                                        @endif
+
+                                        @if ($act->status_activity == 'complete')
+
+                                        <a href="{{route ('activity.full-detail-activity', $act->id)}}" class="btn-sm btn-primary"><i class="fa fa-search-location"></i></a>
+                                        @endif
                                     </ul>
                                 </td>
                             </tr>
-
                             @endforeach
                         </tbody>
                     </table>

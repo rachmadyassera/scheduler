@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/chocolat.css') }}">
+
+
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -30,7 +33,11 @@
 </script>
 <!-- /END GA --></head>
 
-<body>
+    @if (Auth::user()->role == 'operator')
+        <body class="sidebar-mini">
+    @else
+        <body>
+    @endif
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg bg-success"></div>
@@ -77,6 +84,8 @@
   <script src="{{ asset('assets/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
   <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.chocolat.min.js') }}"></script>
+
 
   <!-- Page Specific JS File -->
 
@@ -88,6 +97,14 @@
   <script>
       $(document).ready(function () { // datatable clintside
             $('#datatables').DataTable();
+        });
+  </script>
+  <script>
+      $(document).ready(function () { // datatable clintside
+            $('#datatables-disordering').DataTable({
+                ordering: false,
+                responsive: true
+            });
         });
   </script>
   {{-- <script>

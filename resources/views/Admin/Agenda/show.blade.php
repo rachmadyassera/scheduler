@@ -1,6 +1,8 @@
 @extends('layouts.main')
 @section('content')
     <div class="container">
+
+        @if ($arround_act->count() > 0)
         <div class="card shadow">
             <div class="card-header">
                 <h4 class="card-title">Data kegiatan 1 jam sebelum dan sesudah pada waktu kegiatan yang akan didaftarkan </h4>
@@ -43,6 +45,8 @@
                 </div>
             </div>
         </div>
+
+        @endif
         <div class="card shadow">
             <div class="card-header">
                 <h4 class="card-title">Konfirmasi Penjadwalan Kegiatan {{ Auth::user()->profil->organization->name }}</h4>

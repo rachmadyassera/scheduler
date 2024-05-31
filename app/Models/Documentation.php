@@ -5,22 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Activity extends Model
+class Documentation extends Model
 {
     use HasFactory;
-    public $table = 'activitys';
-
+    public $table = 'documentation_activitys';
 
     protected $fillable = [
         'id',
+        'notesactivity_id',
         'user_id',
-        'organization_id',
-        'date_activity',
-        'name_activity',
-        'location',
-        'description',
-        'accompanying_officer',
-        'status_activity',
+        'picture',
         'status'
     ];
 
@@ -36,15 +30,9 @@ class Activity extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class);
-    }
-
     public function notesactivity()
     {
-        return $this->hasMany(Notesactivity::class);
+        return $this->belongsTo(Notesactivity::class);
     }
 
 }

@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notesactivity extends Model
+class Historyactivity extends Model
 {
-    use HasFactory;
-    public $table = 'notes_activitys';
+    use HasFactory;  public $table = 'history_log_activitys';
 
     protected $fillable = [
         'id',
         'activity_id',
-        'user_id',
-        'notes',
+        'log',
         'status'
     ];
 
@@ -25,19 +23,9 @@ class Notesactivity extends Model
     public function getKeyType(){
         return 'string';
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function activity()
     {
         return $this->belongsTo(Activity::class);
     }
-
-    public function documentation()
-    {
-        return $this->hasMany(Documentation::class);
-    }
-
 }

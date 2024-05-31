@@ -9,13 +9,19 @@
       <ul class="sidebar-menu">
         <li class="menu-header">Main Menu</li>
         <li class="dropdown">
-          <a href="dashboard" class="nav-link "><i class="fas fa-home"></i><span>Dashboard</span></a>
+          <a href="{{ url('/dashboard') }}" class="nav-link "><i class="fas fa-home"></i><span>Dashboard</span></a>
         </li>
         <li class="dropdown">
             <a href="{{ url('/operator') }}" class="nav-link "><i class="fas fa-users"></i><span>Operator</span></a>
         </li>
         <li class="dropdown">
             <a href="{{ url('/activity') }}" class="nav-link "><i class="fas fa-calendar-alt"></i><span>Agenda</span></a>
+        </li>
+        <li class="dropdown">
+            <a href="{{ route('activity.search') }}" class="nav-link "><i class="fas fa-search-location"></i><span>Cari Agenda</span></a>
+        </li>
+        <li class="dropdown">
+            <a href="{{ route('activity.report') }}" class="nav-link "><i class="fas fa-print"></i><span>Cetak Laporan</span></a>
         </li>
 
       </ul>

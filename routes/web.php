@@ -55,11 +55,19 @@ Route::get('/disable-operator/{id}', 'App\Http\Controllers\UserController@disabl
 Route::get('/user/reset-pass-operator/{id}', 'App\Http\Controllers\UserController@reset_pass_operator')->name('reset-pass-operator')->middleware('can:isAdmin');
 
 Route::put('/activity/approve-activity', 'App\Http\Controllers\ActivityController@approve_activity')->name('activity.approve-activity')->middleware('can:isAdmin');
-Route::get('/cancel-activity/{id}', 'App\Http\Controllers\ActivityController@cancel_activity')->middleware('can:isAdmin');
+Route::get('/cancel-activity/{id}', 'App\Http\Controllers\ActivityController@cancel_activity')->name('activity.cancel-activity')->middleware('can:isAdminOperator');
+Route::get('/search-activity', 'App\Http\Controllers\ActivityController@search_activity')->name('activity.search')->middleware('can:isAdmin');
+Route::post('/get-activity', 'App\Http\Controllers\ActivityController@get_activity')->name('activity.searching')->middleware('can:isAdmin');
+Route::get('/full-detail-activity/{id}', 'App\Http\Controllers\ActivityController@detail_master_activity')->name('activity.full-detail-activity')->middleware('can:isAdmin');
+Route::get('/report-activity', 'App\Http\Controllers\ActivityController@report_activity')->name('activity.report')->middleware('can:isAdmin');
+Route::post('/download-report', 'App\Http\Controllers\ActivityController@downloadReport')->name('activity.download')->middleware('can:isAdmin');
 Route::resource('activity', ActivityController::class)->middleware('can:isAdmin');
 
 
 
 
 //========================== OPERATOR =================================
+Route::get('/activity-detail/{id}', 'App\Http\Controllers\ActivityController@detail_activity')->name('activity.detail')->middleware('can:isOperator');
+Route::post('/add-notes-evaluation', 'App\Http\Controllers\ActivityController@store_notes')->name('activity.store-notes')->middleware('can:isOperator');
+Route::get('/delete-note/{id}', 'App\Http\Controllers\ActivityController@deleteNote')->name('activity.delete-note')->middleware('can:isOperator');
 
