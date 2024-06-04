@@ -366,4 +366,16 @@ class ActivityController extends Controller
 
     }
 
+    public function savePdf(String $id)
+    {
+        $act = Activity::with('notesactivity')->where('status','enable')->where('id',$id)->where('status_activity','complete')->where('organization_id',Auth::user()->profil->organization_id)->first();
+
+        $title = 'Laporan Kegiatan '.Auth::user()->profil->organization->name;
+        // return view('Admin.Agenda.single-data-pdf', compact('act','title'));
+
+        $pdf = PDF::loadview('Admin.Agenda.single-data-pdf', compact('act','title'))->setPaper('legal', 'potrait');
+        return $pdf->download($title.'.pdf');
+
+    }
+
 }

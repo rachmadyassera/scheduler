@@ -79,6 +79,8 @@
                             <td>
                                 @if ($act->status_activity =='complete')
                                 <div class="badge badge-success">Complete</div>
+
+                                <a href="{{route ('activity.savepdf', $act->id)}}" class="btn-sm btn-primary"><i class="fa fa-file-pdf"></i> Pdf</a>
                                 @elseif ($act->status_activity =='cancel')
                                 <div class="badge badge-danger">Cancel</div>
                                 @else

@@ -59,6 +59,7 @@ Route::get('/cancel-activity/{id}', 'App\Http\Controllers\ActivityController@can
 Route::get('/search-activity', 'App\Http\Controllers\ActivityController@search_activity')->name('activity.search')->middleware('can:isAdmin');
 Route::post('/get-activity', 'App\Http\Controllers\ActivityController@get_activity')->name('activity.searching')->middleware('can:isAdmin');
 Route::get('/full-detail-activity/{id}', 'App\Http\Controllers\ActivityController@detail_master_activity')->name('activity.full-detail-activity')->middleware('can:isAdmin');
+Route::get('/savepdf/{id}', 'App\Http\Controllers\ActivityController@savePdf')->name('activity.savepdf')->middleware('can:isAdmin');
 Route::get('/report-activity', 'App\Http\Controllers\ActivityController@report_activity')->name('activity.report')->middleware('can:isAdmin');
 Route::post('/download-report', 'App\Http\Controllers\ActivityController@downloadReport')->name('activity.download')->middleware('can:isAdmin');
 Route::resource('activity', ActivityController::class)->middleware('can:isAdmin');
