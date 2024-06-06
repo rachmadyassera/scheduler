@@ -165,7 +165,8 @@
                         <textarea name="notes"  class="form-control" style="height: 100px;"></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="inputImage">Upload Photo:</label>
+                        <label class="form-label" for="inputImage">Upload Photo :</label>
+                        <label class="form-label" for="inputImage">*Rekomendasi ukuran maximal file 5Mb dan posisi landscape</label>
                         <input
                             type="file"
                             name="images[]"
@@ -174,7 +175,7 @@
                             class="form-control">
                     </div>
                     <div class="text-right">
-                        <input type="submit" value="Simpan Data" class="btn btn-success">
+                        <input type="submit" onClick="this.form.submit(); this.disabled=true; this.value='Proses…'; "value="Simpan Data" class="btn btn-success">
                     </div>
                 </form>
             </div>

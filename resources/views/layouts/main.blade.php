@@ -49,7 +49,7 @@
     @elseif (Auth::user()->role == 'admin')
     @include('partials.Admin.sidebar')
     @else
-    @include('partials.operator.sidebar')
+    @include('partials.Operator.sidebar')
     @endif
 
       <!-- Main Content -->
