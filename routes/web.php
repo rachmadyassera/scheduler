@@ -32,6 +32,8 @@ Auth::routes();
 
 // ======================= ALL ROLE ==================================
 Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
+Route::get('/profil', 'App\Http\Controllers\ProfilController@index')->name('profil.index')->middleware('can:isAdminOperator');
+Route::put('/profil/change-password', 'App\Http\Controllers\ProfilController@change_password')->name('profil.change-password')->middleware('can:isAdminOperator');
 
 
 //========================= SUPER ADMIN ===============================
