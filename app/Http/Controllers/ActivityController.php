@@ -111,7 +111,7 @@ class ActivityController extends Controller
     {
         $request_date = Carbon::parse($request->date_activity)->toDateTimeString();
         // dd($request_date, $request->date_activity);
-        $check_date_act = Activity::where('date_activity',$request_date )->where('organization_id',Auth::user()->profil->organization_id)->where('status','enable')->first();
+        $check_date_act = Activity::where('date_activity',$request_date )->whereNot('id',$id)->where('organization_id',Auth::user()->profil->organization_id)->where('status','enable')->first();
         // dd($check_date_act);
         if(!empty($check_date_act)){
             Alert::warning('Gagal', 'Tanggal Kegiatan memiliki waktu yang sama dengan kegiatan '.$check_date_act->name_activity.' yang telah terdaftar pada sistem');
