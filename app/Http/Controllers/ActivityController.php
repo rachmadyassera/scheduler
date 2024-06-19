@@ -117,6 +117,7 @@ class ActivityController extends Controller
             Alert::warning('Gagal', 'Tanggal Kegiatan memiliki waktu yang sama dengan kegiatan '.$check_date_act->name_activity.' yang telah terdaftar pada sistem');
             return  back();
         }
+
         // dd($request_date);
         $act = Activity::find($id);
         $act->date_activity = $request->date_activity;
@@ -321,7 +322,7 @@ class ActivityController extends Controller
 
     public function get_activity(Request $request)
     {
-        $startDate = Carbon::parse($request->tglawal)->subDay();
+        $startDate = Carbon::parse($request->tglawal);
         $endDate = Carbon::parse($request->tglakhir)->addDay();
         $activity = Activity::whereBetween('date_activity',[$startDate,$endDate] )->where('status','enable')->where('organization_id',Auth::user()->profil->organization_id)->reorder('date_activity','asc')->get();
         // dd($act, $notes[0]->documentation);
@@ -374,6 +375,32 @@ class ActivityController extends Controller
         // return view('Admin.Agenda.single-data-pdf', compact('act','title'));
 
         $pdf = PDF::loadview('Admin.Agenda.single-data-pdf', compact('act','title'))->setPaper('legal', 'potrait');
+        return $pdf->download($title.'.pdf');
+
+    }
+
+
+    public function timelineActivity()
+    {
+        return view('Admin.Agenda.timeline-agenda');
+
+    }
+
+
+    public function downloadTimeline(Request $request)
+    {
+        $startDate = Carbon::parse($request->tglawal);
+        $endDate = Carbon::parse($request->tglakhir)->addDay();
+        $formatstartDate = Carbon::parse($request->tglawal)->isoFormat('dddd, D MMMM Y');
+        $formatendDate = Carbon::parse($request->tglakhir)->isoFormat('dddd, D MMMM Y');
+
+        $activity = Activity::with('notesactivity')->whereBetween('date_activity',[$startDate,$endDate] )->where('status','enable')->where('status_activity','pending')->where('organization_id',Auth::user()->profil->organization_id)->reorder('date_activity','asc')->get();
+
+        $title = 'Jadwal Kegiatan '.Auth::user()->profil->organization->name;
+        $subTitle = 'Pada Hari '.$formatstartDate.' s/d '.$formatendDate;
+        // return view('Admin.Agenda.timeline', compact('activity','title','subTitle'));
+
+        $pdf = PDF::loadview('Admin.Agenda.timeline', compact('activity','title','subTitle'))->setPaper('legal', 'landscape');
         return $pdf->download($title.'.pdf');
 
     }

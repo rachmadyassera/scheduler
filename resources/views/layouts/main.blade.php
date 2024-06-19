@@ -31,7 +31,30 @@
 
   gtag('config', 'UA-94034622-3');
 </script>
-<!-- /END GA --></head>
+<!-- /END GA -->
+<style>
+    .floating {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #06ad00;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 3;
+    }
+
+    .fab-icon {
+    margin-top: 16px;
+    }
+
+</style>
+
+</head>
 
     @if (Auth::user()->role == 'operator')
         <body class="sidebar-mini">
@@ -182,6 +205,17 @@ function confirmation(ev) {
         });
 }
 </script>
+
+<script>
+    $(document).ready(function(){
+        $('#MybtnModal').click(function(){
+            // $('#Mymodal').modal('show')
+            $("#fire-modal-2").modal('show');
+
+        });
+    });
+</script>
+
 </body>
 </html>
 

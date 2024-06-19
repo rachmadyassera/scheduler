@@ -5,10 +5,10 @@
         <div class="col-12">
             <div class="card shadow">
               <div class="card-header">
-                <h4>Cetak data agenda </h4>
+                <h4>Cetak jadwal kegiatan</h4>
               </div>
               <div class="card-body">
-                <form action="{{route('activity.searching')}}" method="POST">
+                <form action="{{route('activity.downloadTimeline')}}" method="POST">
                     @csrf
 
                 <div class="form-row">
@@ -24,7 +24,7 @@
 
                   <div class="form-group">
                     <div class="text-right">
-                        <input type="submit" value="Search"  class="btn btn-success">
+                        <input type="submit" value="Search" onClick="this.form.submit(); this.disabled=true; this.value='Proses…'; "  class="btn btn-success">
                     </div>
                   </div>
 
@@ -34,5 +34,4 @@
           </div>
 
     </div>
-
 @endsection

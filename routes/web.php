@@ -64,6 +64,8 @@ Route::get('/full-detail-activity/{id}', 'App\Http\Controllers\ActivityControlle
 Route::get('/savepdf/{id}', 'App\Http\Controllers\ActivityController@savePdf')->name('activity.savepdf')->middleware('can:isAdmin');
 Route::get('/report-activity', 'App\Http\Controllers\ActivityController@report_activity')->name('activity.report')->middleware('can:isAdmin');
 Route::post('/download-report', 'App\Http\Controllers\ActivityController@downloadReport')->name('activity.download')->middleware('can:isAdmin');
+Route::get('/timeline-activity', 'App\Http\Controllers\ActivityController@timelineActivity')->name('activity.timeline')->middleware('can:isAdmin');
+Route::post('/download-timeline', 'App\Http\Controllers\ActivityController@downloadTimeline')->name('activity.downloadTimeline')->middleware('can:isAdmin');
 Route::resource('activity', ActivityController::class)->middleware('can:isAdmin');
 
 
