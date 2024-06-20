@@ -12,17 +12,25 @@
                     @csrf
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label>Tanggal Awal </label>
                         <input type="date" name="tglawal" class="form-control" required>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label>Tanggal Akhir </label>
                         <input type="date" name="tglakhir" class="form-control" required>
                     </div>
+                    <div class="form-group col-md-4">
+                        <label>Data Jenis Kegiatan</label>
+                        <select class="form-control" name="private" required>
+                            <option value = "" selected> Pilih </option>
+                            <option value = "all"> Seluruhnya </option>
+                            <option value = "disprivate"> Kecualikan Private </option>
+                        </select>
+                    </div>
                 </div>
 
-                  <div class="form-group">
+                <div class="form-group">
                     <div class="text-right">
                         <input type="submit" value="Search" onClick="this.form.submit(); this.disabled=true; this.value='Proses…'; "  class="btn btn-success">
                     </div>

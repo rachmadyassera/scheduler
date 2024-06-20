@@ -23,6 +23,10 @@
                             </td>
                             <td>
                                 {{ $act->name_activity }}
+
+                                @if ($act->is_private == 'true')
+                                <div class="badge badge-danger">Private</div>
+                                @endif
                             </td>
                         </tr>
                         <tr>

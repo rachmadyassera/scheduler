@@ -58,6 +58,7 @@ class ActivityController extends Controller
         $newData ->location = $request->location;
         $newData ->description = $request->description;
         $newData ->accompanying_officer = $request->accompanying_officer;
+        $newData ->is_private = $request->private;
 
         $date_subhour = Carbon::parse($request->date_activity)->subHour();
         $date_addhour = Carbon::parse($request->date_activity)->addHour();
@@ -125,6 +126,7 @@ class ActivityController extends Controller
         $act->location = $request->location;
         $act->description = $request->description;
         $act->accompanying_officer = $request->accompanying_officer;
+        $act->is_private = $request->private;
         $act->save();
 
 
@@ -398,9 +400,16 @@ class ActivityController extends Controller
 
         $title = 'Jadwal Kegiatan '.Auth::user()->profil->organization->name;
         $subTitle = 'Pada Hari '.$formatstartDate.' s/d '.$formatendDate;
+        // if ($request->private == 'disprivate') {
+        //     return view('Admin.Agenda.disprivate-timeline', compact('activity','title','subTitle'));
+        // }
         // return view('Admin.Agenda.timeline', compact('activity','title','subTitle'));
 
-        $pdf = PDF::loadview('Admin.Agenda.timeline', compact('activity','title','subTitle'))->setPaper('legal', 'landscape');
+        if ($request->private == 'disprivate') {
+            $pdf = PDF::loadview('Admin.Agenda.disprivate-timeline', compact('activity','title','subTitle'))->setPaper('legal', 'landscape');
+        }else{
+            $pdf = PDF::loadview('Admin.Agenda.timeline', compact('activity','title','subTitle'))->setPaper('legal', 'landscape');
+        }
         return $pdf->download($title.'.pdf');
 
     }

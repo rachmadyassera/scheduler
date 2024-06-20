@@ -56,24 +56,40 @@
 
             <tbody>
                 @foreach($activity as $act)
-                <tr>
-                    <td style="vertical-align: top; border-width: 1px;
-                    border-color: #000;">{{ $loop->iteration }}</td>
-                    <td style="vertical-align: top; border-width: 1px;
-                    border-color: #000;">{{ $carbon::parse($act->date_activity)->isoFormat('dddd, D MMMM Y h:m A') }}</td>
-                    <td style="vertical-align: top; border-width: 1px;
-                    border-color: #000;">{{$act->name_activity}}
-                    @if ($act->is_private == 'true')
-                        <b>(Private)</b>
-                    @endif
-                    </td>
-                    <td style="vertical-align: top; border-width: 1px;
-                    border-color: #000;">{{ $act->location }}</td>
-                    <td style="vertical-align: top; border-width: 1px;
-                    border-color: #000;">{{ $act->description }}</td>
-                    <td style="vertical-align: top; border-width: 1px;
-                    border-color: #000;">{{ $act->accompanying_officer }}</td>
-                </tr>
+                @if ($act->is_private == 'true')
+
+                    <tr>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $loop->iteration }}</td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $carbon::parse($act->date_activity)->isoFormat('dddd, D MMMM Y h:m A') }}</td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;" colspan="4" align="center"> <b>- - P R I V A T E - -</b>
+                        </td>
+                    </tr>
+
+                @else
+
+                    <tr>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $loop->iteration }}</td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $carbon::parse($act->date_activity)->isoFormat('dddd, D MMMM Y h:m A') }}</td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{$act->name_activity}}
+                        @if ($act->is_private == 'true')
+                            <b>(Private)</b>
+                        @endif
+                        </td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $act->location }}</td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $act->description }}</td>
+                        <td style="vertical-align: top; border-width: 1px;
+                        border-color: #000;">{{ $act->accompanying_officer }}</td>
+                    </tr>
+
+                @endif
                 @endforeach
             </tbody>
 

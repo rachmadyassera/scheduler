@@ -31,7 +31,11 @@
                             @foreach ($arround_act as $ar_act )
                             <tr>
                                 <td style="vertical-align: middle; ">{{$ar_act->date_activity}}</td>
-                                <td style="vertical-align: middle; ">{{$ar_act->name_activity}}</td>
+                                <td style="vertical-align: middle; ">{{$ar_act->name_activity}}
+                                    @if ($user->is_private =='true')
+                                    <div class="badge badge-danger">Private</div>
+                                    @endif
+                                </td>
                                 <td style="vertical-align: middle; ">{{$ar_act->location}}</td>
                                 <td style="vertical-align: middle; ">{{$ar_act->description}}</td>
                                 <td style="vertical-align: middle; ">{{$ar_act->accompanying_officer}}</td>

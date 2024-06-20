@@ -32,7 +32,11 @@
                             @foreach ($activity as $act )
                             <tr>
                                 <td style="width:100px">{{$act->date_activity}}</td>
-                                <td>{{$act->name_activity}}</td>
+                                <td>{{$act->name_activity}}
+                                    @if ($act->is_private =='true')
+                                    <div class="badge badge-danger">Private</div>
+                                    @endif
+                                </td>
                                 <td >{{$act->location}}</td>
                                 <td >{{$act->description}}</td>
                                 <td >{{$act->accompanying_officer}}</td>

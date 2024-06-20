@@ -7,8 +7,12 @@
               <div class="card-icon">
                 <i class="far fa-file"></i>
               </div>
-              <h4>Detail Kegiatan</h4>
-              <div class="card-description">Rincian Kegiatan Pimpinan</div>
+              <h4>Detail Kegiatan
+                @if ($act->is_private == 'true')
+                <div class="badge badge-danger">Private</div>
+                @endif </h4>
+              <div class="card-description">Rincian Kegiatan Pimpinan
+                </div>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive shadow">

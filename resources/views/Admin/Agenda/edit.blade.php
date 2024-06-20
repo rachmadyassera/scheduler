@@ -33,6 +33,18 @@
                         <label>Pejabat Pendamping </label>
                         <textarea name="accompanying_officer"  class="form-control" style="height: 100px;" >{{$act->accompanying_officer}}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label>Jenis Kegiatan</label>
+                        <select class="form-control" name="private" required>
+                            @if ($act->is_private =='true')
+                            <option value = "true" selected> Private </option>
+                            <option value = "false"> Umum </option>
+                            @else
+                            <option value = "true"> Private </option>
+                            <option value = "false" selected> Umum </option>
+                            @endif
+                        </select>
+                    </div>
                     <div class="text-right">
                         <input type="submit" value="Simpan Data" class="btn btn-success">
                     </div>

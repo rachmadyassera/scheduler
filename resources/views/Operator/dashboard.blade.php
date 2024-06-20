@@ -36,6 +36,10 @@
                                   @else
                                   @endif
                                 {{$td->name_activity}}
+
+                                @if ($td->is_private == 'true')
+                                <div class="badge badge-danger">Private</div>
+                                @endif
                             </td>
                             <td>
                                 {{$td->date_activity}}
@@ -101,6 +105,10 @@
                             <tr>
                               <td>
                                   {{$tm->name_activity}}
+
+                                @if ($td->is_private == 'true')
+                                <div class="badge badge-danger">Private</div>
+                                @endif
                               </td>
                               <td>
                                   {{$tm->date_activity}}
