@@ -32,10 +32,6 @@
                         <label>Pejabat Pendamping </label>
                         <textarea name="accompanying_officer"  class="form-control" style="height: 100px;" ></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Pejabat Pendamping </label>
-                        <textarea name="accompanying_officer"  class="form-control" style="height: 100px;" ></textarea>
-                    </div>
 
                     <div class="form-group">
                         <label>Jenis Kegiatan</label>
